@@ -33,7 +33,12 @@ namespace ListViewSample
 			progress.SetMessage("Contacting server. Please wait...");
 			progress.SetCancelable(false);
 			progress.Show();
-			createListView ();
+			Android.Database.ICursor sqldb_cursor = sqldb.GetRecordCursor ();
+			if (sqldb_cursor.Count > 0) {
+				populateListFromDB (sqldb_cursor);
+			} else {
+				createListView ();
+			}
 		}
 
 		protected override void OnListItemClick(ListView l, View v, int position, long id)
@@ -77,13 +82,7 @@ namespace ListViewSample
 
 					for (int r = 0; r < j.Count; r++) {
 						var obj = j[r];
-						Console.WriteLine ("## Val ## {0}", obj["firstName"]);
-						var itm = new TableItem {
-							Heading = obj["firstName"] , 
-							SubHeading = obj["title"],
-							DownloadUrl = obj["imageDownloadPath"]
-						};
-
+						// Writing Employee record in database
 						var employee = new Employee {
 							Id = obj["id"] , 
 							Title = obj["title"],
@@ -101,28 +100,43 @@ namespace ListViewSample
 						};
 
 						sqldb.AddRecord (employee);
+
 						Console.WriteLine("-------  {0}  --------",sqldb.Message);
 
-						items.Add (itm);
 					}
 
 					RunOnUiThread (() => {
-						progress.Dismiss();
-						ListAdapter = new HomeScreenAdapter(this, items);
-						ListView.FastScrollEnabled = true;
-
+						populateListFromDB(sqldb.GetRecordCursor ());
 					});
 	
-
-				}            
+				}
 
 			}, httpReq);
+		
+
+	}
+
+		private  void populateListFromDB(Android.Database.ICursor sqldb_cursor){
+
+
+			if (sqldb_cursor != null) 
+			{
+
+				sqldb_cursor.MoveToFirst();
+				do {
+					var itm = new TableItem {
+						Heading = sqldb_cursor.GetString(0) , 
+						SubHeading = sqldb_cursor.GetString(1),
+						DownloadUrl = sqldb_cursor.GetString(2)
+					};
+					items.Add (itm);
+				} while (sqldb_cursor.MoveToNext());
+
+			}
+			progress.Dismiss();
+			ListAdapter = new HomeScreenAdapter(this, items);
+			ListView.FastScrollEnabled = true;
 		}
-
-		private void AddrecordToDB(){
-
-		}
-
 	}
 }
 
