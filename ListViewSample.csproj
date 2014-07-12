@@ -55,6 +55,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="HomeScreenAdapter.cs" />
     <Compile Include="TableItem.cs" />
+    <Compile Include="EmployeeDatabase.cs" />
+    <Compile Include="Employee.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

@@ -11,6 +11,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Json;
 using System.IO;
+using Android.Database.Sqlite;
 
 namespace ListViewSample
 {
@@ -19,10 +20,14 @@ namespace ListViewSample
 	{
 		List<TableItem> items = new List<TableItem> ();
 		ProgressDialog progress;
+		private EmployeeDatabase sqldb;
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate(bundle);
 			progress = new ProgressDialog(this);
+
+			sqldb = new EmployeeDatabase("employee_db");
+
 			progress.Indeterminate = true;
 			progress.SetProgressStyle(ProgressDialogStyle.Spinner);
 			progress.SetMessage("Contacting server. Please wait...");
@@ -78,6 +83,26 @@ namespace ListViewSample
 							SubHeading = obj["title"],
 							DownloadUrl = obj["imageDownloadPath"]
 						};
+
+						var employee = new Employee {
+							Id = obj["id"] , 
+							Title = obj["title"],
+							Email = obj["email"],
+							City = obj["city"],
+							Picture = obj["picture"],
+							ImageDownloadPath = obj["imageDownloadPath"],
+							ReportCount = obj["reportCount"],
+							FName = obj["firstName"],
+							LName = obj["lastName"],
+							ManagerId = obj["managerId"],
+							Department = obj["department"],
+							OfficePhone = obj["officePhone"],
+							CellPhone = obj["cellPhone"]
+						};
+
+						sqldb.AddRecord (employee);
+						Console.WriteLine("-------  {0}  --------",sqldb.Message);
+
 						items.Add (itm);
 					}
 
@@ -92,6 +117,10 @@ namespace ListViewSample
 				}            
 
 			}, httpReq);
+		}
+
+		private void AddrecordToDB(){
+
 		}
 
 	}
