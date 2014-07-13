@@ -57,6 +57,7 @@
     <Compile Include="TableItem.cs" />
     <Compile Include="EmployeeDatabase.cs" />
     <Compile Include="Employee.cs" />
+    <Compile Include="EmployeeDetailActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -68,6 +69,7 @@
     <AndroidResource Include="Resources\values\Strings.xml" />
     <AndroidResource Include="Resources\drawable\Icon.png" />
     <AndroidResource Include="Resources\layout\CustomView.axml" />
+    <AndroidResource Include="Resources\layout\employee_details.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>

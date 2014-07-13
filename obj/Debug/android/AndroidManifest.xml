@@ -3,6 +3,7 @@
   <uses-sdk android:minSdkVersion="18" android:targetSdkVersion="19" />
   <application android:label="ListViewSample" android:name="mono.android.app.Application" android:debuggable="true">
     <activity android:icon="@drawable/icon" android:label="ListViewSample" android:name="listviewsample.MainActivity" />
+    <activity android:label="EmployeeDetailActivity" android:name="listviewsample.EmployeeDetailActivity" />
     <provider android:name="mono.MonoRuntimeProvider" android:exported="false" android:initOrder="2147483647" android:authorities="ListViewSample.ListViewSample.mono.MonoRuntimeProvider.__mono_init__" />
     <receiver android:name="mono.android.Seppuku">
       <intent-filter>

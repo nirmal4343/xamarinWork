@@ -18,12 +18,15 @@ namespace ListViewSample
 	[Activity (Label = "ListViewSample", MainLauncher = true, Icon = "@drawable/icon")]
 	public class MainActivity : ListActivity
 	{
+		private string url = "http://learnresfull-restcall.rhcloud.com/restaurent/";
+
 		List<TableItem> items = new List<TableItem> ();
 		ProgressDialog progress;
 		private EmployeeDatabase sqldb;
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate(bundle);
+
 			progress = new ProgressDialog(this);
 
 			sqldb = new EmployeeDatabase("employee_db");
@@ -43,8 +46,15 @@ namespace ListViewSample
 
 		protected override void OnListItemClick(ListView l, View v, int position, long id)
 		{
-			var t = items[position];
-			Android.Widget.Toast.MakeText(this, t.Heading, Android.Widget.ToastLength.Short).Show();
+			var selected_employee = items[position];
+
+			//Android.Widget.Toast.MakeText(this, t.Heading, Android.Widget.ToastLength.Short).Show();
+
+			Console.WriteLine ("******  {0} ******" , selected_employee.Id);
+
+			Intent intent = new Intent(this, typeof(EmployeeDetailActivity));
+			intent.PutExtra ("emp_id", selected_employee.Id);
+			StartActivity(intent);
 		}
 
 		/*  // Sample data to test list view
@@ -68,7 +78,6 @@ namespace ListViewSample
 
 		public  void createListView()
 		{
-			var url = "http://learnresfull-restcall.rhcloud.com/restaurent/";
 			var itemsList = new List<TableItem>();
 			var httpReq = (HttpWebRequest)HttpWebRequest.Create (new Uri (url));
 			httpReq.BeginGetResponse ((ar) => {
@@ -125,9 +134,10 @@ namespace ListViewSample
 				sqldb_cursor.MoveToFirst();
 				do {
 					var itm = new TableItem {
-						Heading = sqldb_cursor.GetString(0) , 
-						SubHeading = sqldb_cursor.GetString(1),
-						DownloadUrl = sqldb_cursor.GetString(2)
+						Id = sqldb_cursor.GetString(0),
+						Heading = sqldb_cursor.GetString(1) , 
+						SubHeading = sqldb_cursor.GetString(2),
+						DownloadUrl = sqldb_cursor.GetString(3)
 					};
 					items.Add (itm);
 				} while (sqldb_cursor.MoveToNext());

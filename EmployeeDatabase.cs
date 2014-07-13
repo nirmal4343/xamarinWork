@@ -124,7 +124,7 @@ namespace ListViewSample
 			Android.Database.ICursor sqldb_cursor = null;
 			try
 			{
-				sqldb_query = "SELECT FName,LName,ImageUrl  FROM Employee;";
+				sqldb_query = "SELECT Id, FName,LName,ImageUrl  FROM Employee;";
 				sqldb_cursor = sqldb.RawQuery(sqldb_query, null);
 				if(!(sqldb_cursor != null))
 				{
@@ -142,12 +142,12 @@ namespace ListViewSample
 
 		//Searches a record and returns an Android.Database.ICursor cursor
 		//Shows records according to search criteria
-		public Android.Database.ICursor GetRecordCursor(string sColumn, string sValue)
+		public Android.Database.ICursor GetRecordCursor(string id)
 		{
 			Android.Database.ICursor sqldb_cursor = null;
 			try
 			{
-				sqldb_query = "SELECT*FROM MyTable WHERE " + sColumn + " LIKE '" + sValue + "%';";
+				sqldb_query = "SELECT FName, LName, Department, OfficePhone, CellPhone,Title, Email FROM Employee WHERE Id = '" + id + "';";
 				sqldb_cursor = sqldb.RawQuery(sqldb_query, null);
 				if(!(sqldb_cursor != null))
 				{

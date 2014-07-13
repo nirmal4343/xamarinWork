@@ -13,3 +13,4 @@ C:\Users\Nirmal\Documents\Projects\Password\ListViewSample\obj\Debug\res\drawabl
 C:\Users\Nirmal\Documents\Projects\Password\ListViewSample\obj\Debug\res\layout\customview.xml
 C:\Users\Nirmal\Documents\Projects\Password\ListViewSample\obj\Debug\R.cs.flag
 C:\Users\Nirmal\Documents\Projects\Password\ListViewSample\obj\Debug\uploadflags.txt
+C:\Users\Nirmal\Documents\Projects\Password\ListViewSample\obj\Debug\res\layout\employee_details.xml
