@@ -124,7 +124,7 @@ namespace ListViewSample
 			Android.Database.ICursor sqldb_cursor = null;
 			try
 			{
-				sqldb_query = "SELECT Id, FName,LName,ImageUrl  FROM Employee;";
+				sqldb_query = "SELECT Id, FName, LName, ImageUrl, Picture FROM Employee;";
 				sqldb_cursor = sqldb.RawQuery(sqldb_query, null);
 				if(!(sqldb_cursor != null))
 				{

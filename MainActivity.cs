@@ -137,7 +137,8 @@ namespace ListViewSample
 						Id = sqldb_cursor.GetString(0),
 						Heading = sqldb_cursor.GetString(1) , 
 						SubHeading = sqldb_cursor.GetString(2),
-						DownloadUrl = sqldb_cursor.GetString(3)
+						DownloadUrl = sqldb_cursor.GetString(3),
+						ImageName = sqldb_cursor.GetString(4)
 					};
 					items.Add (itm);
 				} while (sqldb_cursor.MoveToNext());

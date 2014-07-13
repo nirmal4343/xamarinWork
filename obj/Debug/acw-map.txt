@@ -1,3 +1,4 @@
 ListViewSample.MainActivity;listviewsample.MainActivity
 ListViewSample.HomeScreenAdapter;listviewsample.HomeScreenAdapter
+ListViewSample.HomeScreenAdapter.BitmapCache;listviewsample.HomeScreenAdapter_BitmapCache
 ListViewSample.EmployeeDetailActivity;listviewsample.EmployeeDetailActivity
